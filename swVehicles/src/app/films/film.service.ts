@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, computed, effect, inject } from '@angular/core';
+import { Injectable, effect, inject } from '@angular/core';
 import { forkJoin} from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { VehicleService } from '../vehicles/vehicle.service';
