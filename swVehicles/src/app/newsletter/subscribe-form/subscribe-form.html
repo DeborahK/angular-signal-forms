@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    Subscribe to our Newsletter
+    {{pageHeader()}}
   </div>
   <div class="card-body">
     <form>
@@ -47,7 +47,7 @@
         @if (subscribeForm.email().invalid() && subscribeForm.email().touched()) {
           <div class="alert alert-danger">
             @for (error of subscribeForm.email().errors(); track error.kind) {
-              <span>{{ error.message }}</span>
+              <div>{{ error.message }}</div>
             }
           </div>
         }
@@ -68,7 +68,7 @@
         @if (subscribeForm.yearsAsFan().invalid() && subscribeForm.yearsAsFan().touched()) {
           <div class="alert alert-danger">
             @for (error of subscribeForm.yearsAsFan().errors(); track error.kind) {
-              <span>{{ error.message }}</span>
+              <div>{{ error.message }}</div>
             }
           </div>
         }
@@ -76,38 +76,24 @@
 
       <div class="row">
         <div class="row-value">
-          <input type="checkbox"
-                 class="form-check-input"
-                 [field]="subscribeForm.priceAlerts"
-                 id="priceAlertsId" />
-          <label class="form-check-label"
-                 for="priceAlertsId">
-            Send me price alerts for new vehicles
-          </label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="row-value">
           <button type="button"
-                  [disabled]="subscribeForm().invalid()"
                   title="Ensure the form is valid and required fields are entered before subscribing"
                   class="btn btn-primary"
                   (click)="subscribe()">
             Subscribe
           </button>
           <button type="button"
-                  class="btn btn-secondary">
+                  class="btn btn-secondary"
+                  (click)="cancel()">
             Cancel
           </button>
         </div>
       </div>
     </form>
 
-    <!-- Success message (conditionally displayed) -->
-    @if (subscribeMessage) {
+    @if (subscribeMessage()) {
       <div class="alert alert-success">
-        {{ subscribeMessage }}
+        {{ subscribeMessage() }}
       </div>
     }
   </div>
