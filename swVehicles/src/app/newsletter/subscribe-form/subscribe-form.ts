@@ -23,7 +23,7 @@ export class SubscribeForm {
 
   cancel() {
     // Reset form (or navigate to another page)
-    this.resetForm();
+    this.subscribeForm().reset(initialData);
   }
 
   subscribe() {
@@ -37,18 +37,9 @@ export class SubscribeForm {
     // Submit to the server
     console.log('Submitting data to server:', this.subscribeForm().value());
     // Reset form (or navigate to another page)
-    this.resetForm();
+    this.subscribeForm().reset(initialData);
   }
 
-  resetForm() {
-    // Reset the form
-    this.subscribeForm().reset();
-    // Reset to the initial model data
-    this.subscribeModel.set(initialData);
-
-  }
-
-  eff = effect(() => {
-    console.log('Email:', this.subscribeModel().email);
-  });
+  eff = effect(() =>
+    console.log('Email:', this.subscribeModel().email));
 }
