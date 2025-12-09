@@ -14,7 +14,7 @@
                  class="form-control"
                  [field]="subscribeForm.firstName"
                  id="firstNameId"
-                 placeholder="First Name (optional)" />
+                 placeholder="First Name" />
         </div>
       </div>
 
@@ -28,7 +28,7 @@
                  class="form-control"
                  [field]="subscribeForm.lastName"
                  id="lastNameId"
-                 placeholder="Last Name (optional)" />
+                 placeholder="Last Name" />
         </div>
       </div>
 
@@ -42,7 +42,7 @@
                  class="form-control"
                  [field]="subscribeForm.email"
                  id="emailId"
-                 placeholder="Email (required)" />
+                 placeholder="Email" />
         </div>
         @if (subscribeForm.email().invalid() && subscribeForm.email().touched()) {
           <div class="alert alert-danger">
@@ -63,7 +63,7 @@
                 class="form-control"
                 [field]="subscribeForm.phone"
                 id="phoneId"
-                placeholder="Cell Phone Number (required)" />
+                placeholder="Cell Phone Number" />
         </div>
         @if (subscribeForm.phone().invalid() && subscribeForm.phone().touched()) {
           <div class="alert alert-danger">
