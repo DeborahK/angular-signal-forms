@@ -35,7 +35,10 @@
       <div class="row">
         <label class="row-label"
                for="emailId">
-          Email <span class="text-danger">*</span>
+          Email
+          @if (subscribeForm.email().required()) {
+            <span class="text-danger">*</span>
+          }
         </label>
         <div class="row-value">
           <input type="email"
@@ -56,7 +59,10 @@
       <div class="row">
         <label class="row-label"
               for="phoneId">
-          Phone <span class="text-danger">*</span>
+          Phone
+          @if (subscribeForm.phone().required()) {
+            <span class="text-danger">*</span>
+          }
         </label>
         <div class="row-value">
           <input type="tel"
