@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    {{pageHeader()}}
+    Subscribe to our Newsletter
   </div>
   <div class="card-body">
     <form>
@@ -126,23 +126,15 @@
         <div class="row-value">
           <button type="button"
                   title="Ensure the form is valid and required fields are entered before subscribing"
-                  class="btn btn-primary"
-                  (click)="subscribe()">
+                  class="btn btn-primary">
             Subscribe
           </button>
           <button type="button"
-                  class="btn btn-secondary"
-                  (click)="cancel()">
+                  class="btn btn-secondary">
             Cancel
           </button>
         </div>
       </div>
     </form>
-
-    @if (subscribeMessage()) {
-      <div class="alert alert-success">
-        {{ subscribeMessage() }}
-      </div>
-    }
   </div>
 </div>
