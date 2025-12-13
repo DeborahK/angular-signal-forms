@@ -1,4 +1,4 @@
-import { applyWhen, email, max, min, minLength, required, schema, validate } from "@angular/forms/signals";
+import { applyWhen, email, FieldTree, max, min, minLength, required, schema, SchemaPath, validate } from "@angular/forms/signals";
 
 export interface Subscription {
   email: string;
@@ -51,10 +51,10 @@ export const subscriptionSchema = schema<Subscription>((rootPath) => {
   max(rootPath.yearsAsFan, 100, { message: 'Please enter a valid number of years' });
 });
 
-function phoneNumber(field: any, options?: { message?: string }) {
+function phoneNumber(field: SchemaPath<string>, options?: { message?: string }) {
   validate(field, ({ value }) => {
     const phoneRegex = /^\d{3}-\d{3}-\d{4}$/
-    if (value() && !phoneRegex.test(value() as string)) {
+    if (value() && !phoneRegex.test(value())) {
       return {
         kind: 'phoneNumber',
         message: 'Please enter a valid phone number of the form: 111-555-1212'
