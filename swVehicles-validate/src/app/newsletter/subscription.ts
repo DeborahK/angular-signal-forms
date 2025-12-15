@@ -37,9 +37,9 @@ export const subscriptionSchema = schema<Subscription>((rootPath) => {
     }
   );
   // Cross field validation: Invalidate one of the fields
-  validate(rootPath.sendViaEmail, (ctx) => {
-    const viaEmail = ctx.value();
-    const viaText = ctx.valueOf(rootPath.sendViaText);
+  validate(rootPath.sendViaText, (ctx) => {
+    const viaText = ctx.value();
+    const viaEmail = ctx.valueOf(rootPath.sendViaEmail);
     if (viaEmail || viaText) return null;
     return {
       kind: 'sendViaMissing',

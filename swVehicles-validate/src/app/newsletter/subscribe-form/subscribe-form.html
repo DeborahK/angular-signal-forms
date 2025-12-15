@@ -95,7 +95,7 @@
               Email
             </label>
           </div>
-          @if (subscribeForm.sendViaEmail().invalid() && subscribeForm.sendViaEmail().touched()) {
+          @if (subscribeForm.sendViaEmail().invalid()) {
           <div class="alert alert-danger">
             @for (error of subscribeForm.sendViaEmail().errors(); track error.kind) {
             <div>{{ error.message }}</div>
@@ -112,7 +112,7 @@
               Text
             </label>
           </div>
-          @if (subscribeForm.sendViaText().invalid() && subscribeForm.sendViaText().touched()) {
+          @if (subscribeForm.sendViaText().invalid()) {
           <div class="alert alert-danger">
             @for (error of subscribeForm.sendViaText().errors(); track error.kind) {
             <div>{{ error.message }}</div>
