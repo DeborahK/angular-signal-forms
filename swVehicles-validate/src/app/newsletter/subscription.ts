@@ -1,4 +1,4 @@
-import { applyWhen, email, max, min, minLength, required, schema, validate } from "@angular/forms/signals";
+import { applyWhen, email, max, min, minLength, PathKind, required, schema, SchemaPath, SchemaPathTree, validate, validateTree } from "@angular/forms/signals";
 
 export interface Subscription {
   email: string;
@@ -36,16 +36,40 @@ export const subscriptionSchema = schema<Subscription>((rootPath) => {
         minLength(phonePath, 10, { message: 'Minimum of 10 digits is required' })
     }
   );
-  validate(rootPath.sendViaEmail, ({ value, valueOf }) => {
-    // const viaEmail = value();
-    // const viaText = valueOf(rootPath.sendViaText);
-    // if (viaEmail || viaText) return null;
-    if (value() || valueOf(rootPath.sendViaText)) return null;
+  // Cross field validation: Invalidate one of the fields
+  validate(rootPath.sendViaEmail, (ctx) => {
+    const viaEmail = ctx.value();
+    const viaText = ctx.valueOf(rootPath.sendViaText);
+    if (viaEmail || viaText) return null;
     return {
       kind: 'sendViaMissing',
       message: 'Must select to send via Email or Text or both'
     };
   });
+  // validateSendVia(rootPath);
   min(rootPath.yearsAsFan, 0, { message: 'Years cannot be negative' });
   max(rootPath.yearsAsFan, 100, { message: 'Please enter a valid number of years' });
 });
+
+// Cross field validation using validateTree
+// Included for reference
+// Prefer `validate()` over `validateTree()` for performance reasons
+function validateSendVia(basePath: SchemaPathTree<Subscription, PathKind.Root>) {
+  validateTree(basePath, (ctx) => {
+    const viaEmail = ctx.valueOf(basePath.sendViaEmail);
+    const viaText = ctx.valueOf(basePath.sendViaText);
+    if (viaEmail || viaText) return null;
+    return [
+      {
+        field: ctx.field.sendViaEmail,
+        kind: 'sendViaMissing',
+        message: 'Must select to send via Email or Text or both'
+      },
+      {
+        field: ctx.field.sendViaText,
+        kind: 'sendViaMissing',
+        message: 'Must select to send via Email or Text or both'
+      }
+    ];
+  })
+}
