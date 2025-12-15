@@ -32,10 +32,10 @@ export const subscriptionSchema = schema<Subscription>((rootPath) => {
     rootPath.phone,
     ({ valueOf }) => valueOf(rootPath.sendViaText) === true,
     (phonePath) => {
-      required(phonePath, { message: 'Your cell phone number is required to receive our newsletter' }),
+      required(phonePath, { message: 'Your cell phone number is required to receive our newsletter' });
       minLength(phonePath, 10, { message: 'Minimum of 10 digits is required' })
     }
-  ),
+  );
   min(rootPath.yearsAsFan, 0, { message: 'Years cannot be negative' });
   max(rootPath.yearsAsFan, 100, { message: 'Please enter a valid number of years' });
 });
