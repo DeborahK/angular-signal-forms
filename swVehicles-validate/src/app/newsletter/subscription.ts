@@ -1,4 +1,4 @@
-import { applyWhen, email, max, min, minLength, PathKind, required, schema, SchemaPath, SchemaPathTree, validate, validateTree } from "@angular/forms/signals";
+import { applyWhen, email, max, min, minLength, PathKind, required, schema, SchemaPathTree, validate, validateTree } from "@angular/forms/signals";
 
 export interface Subscription {
   email: string;
@@ -33,10 +33,10 @@ export const subscriptionSchema = schema<Subscription>((rootPath) => {
     ({ valueOf }) => valueOf(rootPath.sendViaText) === true,
     (phonePath) => {
       required(phonePath, { message: 'Your cell phone number is required to receive our newsletter' }),
-        minLength(phonePath, 10, { message: 'Minimum of 10 digits is required' })
+      minLength(phonePath, 10, { message: 'Minimum of 10 digits is required' })
     }
   );
-  // Cross field validation: Invalidate one of the fields
+  // // Cross field validation
   validate(rootPath.sendViaText, (ctx) => {
     const viaText = ctx.value();
     const viaEmail = ctx.valueOf(rootPath.sendViaEmail);
