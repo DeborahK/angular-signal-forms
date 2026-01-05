@@ -20,11 +20,11 @@
                  placeholder="First Name" />
         </div>
         @if (userProfileForm.firstName().invalid() && userProfileForm.firstName().touched()) {
-        <div class="alert alert-danger">
-          @for (error of userProfileForm.firstName().errors(); track error.kind) {
-          <div>{{ error.message }}</div>
-          }
-        </div>
+          <div class="alert alert-danger">
+            @for (error of userProfileForm.firstName().errors(); track error.kind) {
+              <div>{{ error.message }}</div>
+            }
+          </div>
         }
       </div>
 
