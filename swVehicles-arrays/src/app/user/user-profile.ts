@@ -46,6 +46,7 @@ function url(field: SchemaPathTree<string>, options?: { message?: string }) {
   });
 }
 
+// Define the set of validation rules for the array items
 const linksSchema = schema<string>((link) => {
   required(link, {message: 'Once added, the social link is required'});
   url(link);
