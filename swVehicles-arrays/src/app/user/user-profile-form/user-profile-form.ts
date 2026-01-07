@@ -17,7 +17,7 @@ export class UserProfileForm {
   // Declare a form from the model and logic rules schema
   userProfileForm = form(this.userProfileModel, userProfileSchema);
 
-  // Add an empty link
+  // Add an empty social media profile link
   addSocialLink() {
     this.userProfileModel.update(profile => ({
       ...profile,
@@ -25,7 +25,7 @@ export class UserProfileForm {
     }));
   }
 
-  // Delete a link
+  // Delete a social media profile link
   removeSocialLink(index: number) {
     this.userProfileModel.update(profile => ({
       ...profile,

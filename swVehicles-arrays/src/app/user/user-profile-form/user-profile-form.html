@@ -53,21 +53,21 @@
               No social links added yet. Click "Add Social Link" to get started.
             </div>
             }
-            @for (link of userProfileModel().socialLinks; track $index; let idx = $index) {
+            @for (link of userProfileModel().socialLinks; track $index) {
               <div class="social-link-row">
                 <input type="url"
                       class="form-control"
-                      [field]="userProfileForm.socialLinks[idx]"
-                      [id]="'socialLink' + idx"
+                      [field]="userProfileForm.socialLinks[$index]"
+                      [id]="'socialLink' + $index"
                       placeholder="https://example.com/your-profile" />
                 <button type="button"
                         class="btn btn-danger btn-sm"
-                        (click)="removeSocialLink(idx)"
+                        (click)="removeSocialLink($index)"
                         title="Remove this social link">
                   ✕
                 </button>
               </div>
-              @let linkField = userProfileForm.socialLinks[idx];
+              @let linkField = userProfileForm.socialLinks[$index];
               @if (linkField().invalid() && linkField().touched()) {
                 <div class="alert alert-danger">
                   @for (error of linkField().errors(); track error.kind) {
@@ -78,7 +78,7 @@
             }
           </div>
           <button type="button"
-                  class="btn btn-secondary btn-add-link"
+                  class="btn btn-add-link"
                   (click)="addSocialLink()"
                   title="Add a new social link">
             + Add Social Link

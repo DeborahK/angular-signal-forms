@@ -87,10 +87,6 @@ form {
   margin-bottom: var(--spacing-md, 1rem);
 }
 
-.btn-add-link {
-  width: 100%;
-}
-
 /* Buttons */
 .btn {
   display: inline-block;
@@ -148,6 +144,20 @@ form {
 }
 
 .btn-secondary:not(:disabled):hover {
+  background-color: #ede9e0;
+  border-color: #a08a6d;
+  box-shadow: 0 4px 12px rgba(184, 166, 143, 0.3);
+}
+
+.btn-add-link {
+  color: var(--text-primary, #1a1612);
+  background-color: var(--white, #faf8f3);
+  border-color: var(--border-color, #b8a68f);
+  box-shadow: 0 2px 8px rgba(184, 166, 143, 0.2);
+  width: 100%;
+}
+
+.btn-add-link:not(:disabled):hover {
   background-color: #ede9e0;
   border-color: #a08a6d;
   box-shadow: 0 4px 12px rgba(184, 166, 143, 0.3);

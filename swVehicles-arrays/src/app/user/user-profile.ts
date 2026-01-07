@@ -3,7 +3,7 @@ import { applyEach, required, schema, SchemaPathTree, validate } from "@angular/
 export interface UserProfile {
   firstName: string;
   lastName: string;
-  socialLinks: string[]
+  socialLinks: string[];
 }
 
 export const initialData: UserProfile = {
@@ -13,17 +13,17 @@ export const initialData: UserProfile = {
 }
 
 // Apply a single validator
-export const userProfileSchema = schema<UserProfile>(rootPath => {
+export const userProfileSchema1 = schema<UserProfile>(rootPath => {
   required(rootPath.firstName, { message: 'First name is required' });
   applyEach(rootPath.socialLinks, url)
 });
 
 // Apply a set of validators
-export const userProfileSchema2 = schema<UserProfile>(rootPath => {
+export const userProfileSchema = schema<UserProfile>(rootPath => {
   required(rootPath.firstName, { message: 'First name is required' });
   applyEach(rootPath.socialLinks, (path) => {
     required(path, { message: 'If added, the social link is required' });
-    url(path, { message: 'The social link must be a valid URL' })
+    url(path, { message: 'The social link must be a valid URL' });
   })
 });
 
