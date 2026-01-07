@@ -76,6 +76,15 @@ form {
   flex: 1;
 }
 
+/* Horizontal sizing for platform and year fields */
+.social-link-row .platform-input {
+  flex: 0 0 195px;
+}
+
+.social-link-row .year-input {
+  flex: 0 0 120px;
+}
+
 .empty-state {
   padding: var(--spacing-md, 1rem);
   color: var(--text-secondary, #6b5d52);
@@ -84,6 +93,13 @@ form {
   border-radius: var(--border-radius, 0.25rem);
   text-align: center;
   font-style: italic;
+
+  /* On narrow screens, allow wrapping while keeping order */
+  @media (max-width: 768px) {
+    .social-link-row {
+      flex-wrap: wrap;
+    }
+  }
   margin-bottom: var(--spacing-md, 1rem);
 }
 

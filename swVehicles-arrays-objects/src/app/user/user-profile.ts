@@ -1,9 +1,15 @@
-import { applyEach, required, schema, SchemaPathTree, validate } from "@angular/forms/signals";
+import { applyEach, max, min, pattern, required, schema, SchemaPathTree, validate } from "@angular/forms/signals";
 
 export interface UserProfile {
   firstName: string;
   lastName: string;
-  socialLinks: string[];
+  socialLinks: ProfileLink[];
+}
+
+export interface ProfileLink {
+  linkUrl: string;
+  platform: string;
+  memberSinceYear: string;
 }
 
 export const initialData: UserProfile = {
@@ -12,26 +18,37 @@ export const initialData: UserProfile = {
   socialLinks: []
 }
 
-// Apply a single validator
-export const userProfileSchema1 = schema<UserProfile>(rootPath => {
-  required(rootPath.firstName, { message: 'First name is required' });
-  applyEach(rootPath.socialLinks, url)
-});
+export const initialLink: ProfileLink = {
+  linkUrl: '',
+  platform: '',
+  memberSinceYear: ''
+}
 
-// Apply a set of validators
 export const userProfileSchema = schema<UserProfile>(rootPath => {
   required(rootPath.firstName, { message: 'First name is required' });
-  applyEach(rootPath.socialLinks, (path) => {
-    required(path, { message: 'If added, the social link is required' });
-    url(path, { message: 'The social link must be a valid URL' });
-  })
-});
-
-// Apply a set of validators using a separate function
-export const userProfileSchema3 = schema<UserProfile>(rootPath => {
-  required(rootPath.socialLinks, { message: 'If added, the social link is required' });
   applyEach(rootPath.socialLinks, linksSchema)
 });
+
+// Define the set of validation rules for the array items
+// Social link is required if added
+// Social link must be a valid URL
+// Platform is required if a social link was entered
+// Member since year must be between 1990 and the current year
+// Member since year must be 4 digits
+const linksSchema = schema<ProfileLink>((path) => {
+  required(path.linkUrl, { message: 'If added, the social link is required' });
+  url(path.linkUrl, { message: 'The social link must be a valid URL' });
+  required(path.platform, {
+    message: 'Platform name is required when link is entered',
+    when: ({ valueOf }) => Boolean(valueOf(path.linkUrl))
+  });
+  min(path.memberSinceYear, minYear, { message: 'Year must be 1990 or later' });
+  max(path.memberSinceYear, currentYear, { message: 'Year must be this year or earlier' });
+  pattern(path.memberSinceYear, /^\d{4}$/, { message: 'Year must be four digits (YYYY)' });
+});
+
+const currentYear = new Date().getFullYear();
+const minYear = 1990;
 
 // Reusable custom url validator
 function url(field: SchemaPathTree<string>, options?: { message?: string }) {
@@ -48,9 +65,3 @@ function url(field: SchemaPathTree<string>, options?: { message?: string }) {
     }
   });
 }
-
-// Define the set of validation rules for the array items
-const linksSchema = schema<string>((link) => {
-  required(link, { message: 'If added, the social link is required' });
-  url(link);
-});

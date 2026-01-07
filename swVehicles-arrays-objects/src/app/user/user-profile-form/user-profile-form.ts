@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { initialData, UserProfile, userProfileSchema } from '../user-profile';
+import { initialData, initialLink, UserProfile, userProfileSchema } from '../user-profile';
 import { Field, form } from '@angular/forms/signals';
 
 @Component({
@@ -21,7 +21,7 @@ export class UserProfileForm {
   addSocialLink() {
     this.userProfileModel.update(profile => ({
       ...profile,
-      socialLinks: [...profile.socialLinks, '']
+      socialLinks: [...profile.socialLinks, {...initialLink}]
     }));
   }
 
