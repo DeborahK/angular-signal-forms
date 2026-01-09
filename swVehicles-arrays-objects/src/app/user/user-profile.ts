@@ -51,6 +51,7 @@ const currentYear = new Date().getFullYear();
 const minYear = 1990;
 
 // Reusable custom url validator
+// NOTE: Validates that the url is well-formed, not that it exists
 function url(field: SchemaPathTree<string>, options?: { message?: string }) {
   validate(field, (ctx) => {
     try {
