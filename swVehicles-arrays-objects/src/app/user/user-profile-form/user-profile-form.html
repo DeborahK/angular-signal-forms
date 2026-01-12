@@ -15,7 +15,7 @@
         <div class="row-value">
           <input type="text"
                  class="form-control"
-                 [field]="userProfileForm.firstName"
+                 [formField]="userProfileForm.firstName"
                  id="firstNameId"
                  placeholder="First Name" />
         </div>
@@ -36,7 +36,7 @@
         <div class="row-value">
           <input type="text"
                  class="form-control"
-                 [field]="userProfileForm.lastName"
+                 [formField]="userProfileForm.lastName"
                  id="lastNameId"
                  placeholder="Last Name" />
         </div>
@@ -52,19 +52,19 @@
               <div class="social-link-row">
                 <input type="url"
                       class="form-control"
-                      [field]="userProfileForm.socialLinks[$index].linkUrl"
+                      [formField]="userProfileForm.socialLinks[$index].linkUrl"
                       [id]="'socialLink' + $index"
                       placeholder="https://example.com/your-profile"
                       title="URL to your profile on a social platform" />
                 <input type="text"
                       class="form-control platform-input"
-                      [field]="userProfileForm.socialLinks[$index].platform"
+                      [formField]="userProfileForm.socialLinks[$index].platform"
                       [id]="'platform' + $index"
                       placeholder="Platform name"
                       title="Name of the social platform eg LinkedIn" />
                 <input type="number"
                       class="form-control year-input"
-                      [field]="userProfileForm.socialLinks[$index].memberSinceYear"
+                      [formField]="userProfileForm.socialLinks[$index].memberSinceYear"
                       [id]="'memberSinceYear' + $index"
                       placeholder="Year"
                       title="Year your membership started on this platform" />

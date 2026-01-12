@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { initialData, initialLink, UserProfile, userProfileSchema } from '../user-profile';
-import { Field, form } from '@angular/forms/signals';
+import { form, FormField } from '@angular/forms/signals';
 
 @Component({
   selector: 'swv-user-profile-form',
-  imports: [Field],
+  imports: [FormField],
   templateUrl: './user-profile-form.html',
   styleUrl: './user-profile-form.css',
 })
