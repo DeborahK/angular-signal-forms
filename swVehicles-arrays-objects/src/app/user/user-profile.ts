@@ -40,7 +40,7 @@ const linksSchema = schema<ProfileLink>((path) => {
   url(path.linkUrl, { message: 'The social link must be a valid URL' });
   required(path.platform, {
     message: 'Platform name is required when link is entered',
-    when: ({ valueOf }) => Boolean(valueOf(path.linkUrl))
+    when: (ctx) => Boolean(ctx.valueOf(path.linkUrl))
   });
   min(path.memberSinceYear, minYear, { message: 'Year must be 1990 or later' });
   max(path.memberSinceYear, currentYear, { message: 'Year must be this year or earlier' });
