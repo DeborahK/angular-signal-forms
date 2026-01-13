@@ -21,7 +21,7 @@ export class UserProfileForm {
   addSocialLink() {
     this.userProfileModel.update(profile => ({
       ...profile,
-      socialLinks: [...profile.socialLinks, {...initialLink}]
+      socialLinks: [...profile.socialLinks, { ...initialLink }]
     }));
   }
 

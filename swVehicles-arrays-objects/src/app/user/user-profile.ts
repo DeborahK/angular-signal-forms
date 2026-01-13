@@ -26,7 +26,7 @@ export const initialLink: ProfileLink = {
 
 export const userProfileSchema = schema<UserProfile>(rootPath => {
   required(rootPath.firstName, { message: 'First name is required' });
-  applyEach(rootPath.socialLinks, linksSchema)
+  applyEach(rootPath.socialLinks, linksSchema);
 });
 
 // Define the set of validation rules for the array items
