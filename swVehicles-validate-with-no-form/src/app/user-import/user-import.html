@@ -1,0 +1,9 @@
+<div>
+  <button (click)="importUsers()">Import Users</button>
+  @for (message of importMessages(); track $index) {
+    <div style="font-weight: bold;">{{ message.header }}</div>
+    @for (error of message.errors; track $index) {
+      <div style="padding-left:1.25em">{{ error }} </div>
+    }
+  }
+</div>
