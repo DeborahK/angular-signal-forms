@@ -10,8 +10,6 @@ import { userArray } from './user-import-data';
 })
 export class UserImport {
 
-  importMessages = signal<ImportMessage[]>([]);
-
   // Create a form model signal with form fields
   // This represents the form's data structure
   userProfileModel = signal<UserProfile>(initialData);
@@ -19,22 +17,24 @@ export class UserImport {
   // Declare a form from the model and logic rules schema
   userProfileForm = form(this.userProfileModel, userProfileSchema);
 
+  importMessages = signal<ImportMessage[]>([]);
+
   importUsers(): void {
     this.importMessages.set([]);
 
     // Import the data (this uses hard-coded data)
     userArray.forEach(user => {
       // Assign the data to the model
-      this.userProfileModel.set(user)
+      this.userProfileModel.set(user);
 
       // Create an output string to log the import process
       const errors = this.userProfileForm().errorSummary;
       const importMessage: ImportMessage = {
-        header: `${user.firstName} ${user.lastName} has ${errors.length} errors`,
+        header: `${user.firstName} ${user.lastName} has ${errors().length} errors`,
         errors: errors().flatMap(e => e.message ? [e.message] : [])
       };
-      this.importMessages.update(msgs => [...msgs, importMessage])
-    });
+      this.importMessages.update(msgs => [...msgs, importMessage]);
+    })
   }
 }
 
