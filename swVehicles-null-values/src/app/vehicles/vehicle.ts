@@ -10,6 +10,7 @@ export interface VehicleDomain {
   vehicleType: string;
   description: string | null;
   occupancy: number | null;
+  manufactureDate: Date | null;
 }
 
 export interface Vehicle {
@@ -17,13 +18,15 @@ export interface Vehicle {
   vehicleType: string;
   description: string;
   occupancy: number;
+  manufactureDate: Date | null; // null is the empty value for Date bound to <input type=date> 
 }
 
 export const initialData: Vehicle = {
   vehicleName: '',
   vehicleType: '',
   description: '',
-  occupancy: NaN
+  occupancy: NaN,
+  manufactureDate: null
 }
 
 // With no nulls, applyWhenValue isn't needed in this case
