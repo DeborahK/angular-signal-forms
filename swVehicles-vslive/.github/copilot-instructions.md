@@ -35,7 +35,7 @@ Two distinct patterns based on complexity:
   subscribeForm = form(this.subscribeModel, subscriptionSchema);
   // Schema uses: required(), email(), minLength(), min(), max()
   ```
-- Bind fields with `[field]="subscribeForm.firstName"` directive
+- Bind fields with `[FormField]="subscribeForm.firstName"` directive
 - Submit with `submit(this.subscribeForm, () => this.onSubmit())`
 
 ### Computed Signals for Derived State

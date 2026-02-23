@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { VehicleForm } from './vehicles/vehicle-form/vehicle-form';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'swv-root',
-  imports: [VehicleForm],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
