@@ -10,6 +10,11 @@ export const routes: Routes = [
       import('./vehicles/vehicle-shell/vehicle-shell').then(c => c.VehicleShell)
   },
   {
+    path: 'vehicle-form',
+    loadComponent: () =>
+      import('./vehicles/vehicle-form/vehicle-form').then(c => c.VehicleForm)
+  },
+  {
     path: 'subscribe',
     loadComponent: () =>
       import('./newsletter/subscribe-form/subscribe-form').then(c => c.SubscribeForm)

@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { initialData, Subscription, subscriptionSchema } from '../subscription';
 import { form, FormField } from '@angular/forms/signals';
 
@@ -16,7 +16,4 @@ export class SubscribeForm {
 
   // Declare a form from the model and logic rules schema
   subscribeForm = form(this.subscribeModel, subscriptionSchema);
-
-  eff = effect(() =>
-    console.log('Email:', this.subscribeModel().email));
 }

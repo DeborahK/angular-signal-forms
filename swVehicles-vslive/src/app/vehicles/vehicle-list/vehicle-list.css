@@ -10,6 +10,7 @@ select {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   transition: var(--transition-base);
+  margin-bottom: var(--spacing-lg);
 }
 
 select>option {
