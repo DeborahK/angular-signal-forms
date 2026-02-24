@@ -9,11 +9,22 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./vehicles/vehicle-shell/vehicle-shell').then(c => c.VehicleShell)
   },
+  // Only use one type of form: Signal-based, template-driven, or reactive forms
   {
     path: 'vehicle-form',
     loadComponent: () =>
-      import('./vehicles/vehicle-form/vehicle-form').then(c => c.VehicleForm)
+      import('./vehicles/vehicle-signal-form/vehicle-form').then(c => c.VehicleForm)
   },
+  // {
+  //   path: 'vehicle-form',
+  //   loadComponent: () =>
+  //     import('./vehicles/vehicle-template-driven-form/vehicle-template-driven-form').then(c => c.VehicleTemplateDrivenForm)
+  // },
+  // {
+  //   path: 'vehicle-form',
+  //   loadComponent: () =>
+  //     import('./vehicles/vehicle-reactive-form/vehicle-reactive-form').then(c => c.VehicleReactiveForm)
+  // },
   {
     path: 'subscribe',
     loadComponent: () =>

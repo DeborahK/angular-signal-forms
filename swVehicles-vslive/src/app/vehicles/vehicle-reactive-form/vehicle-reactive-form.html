@@ -1,10 +1,10 @@
 <div class="card">
   <div class="card-header">
-    Add a Vehicle (template-driven forms)
+    Add a Vehicle (reactive forms)
   </div>
   <div class="card-body">
-    <form #f="ngForm"
-          (ngSubmit)="onSave(f)"
+    <form [formGroup]="vehicleForm"
+          (ngSubmit)="onSave()"
           autocomplete="off"
           novalidate>
       <div class="row">
@@ -15,23 +15,20 @@
         </label>
         <div class="row-value">
           <input type="text"
-                 name="vehicleName"
-                 id="vehicleNameId"
                  class="form-control"
-                 [(ngModel)]="vehicle.vehicleName"
-                 #vehicleName="ngModel"
-                 required
-                 minlength="5"
+                 formControlName="vehicleName"
+                 id="vehicleNameId"
                  placeholder="Vehicle name" />
         </div>
-        @if (vehicleName.invalid && vehicleName.touched) {
-        <div class="alert alert-danger">
-          @if (vehicleName.hasError('required')) {
-            <div>Vehicle name is required</div>
-          } @else if (vehicleName.hasError('minlength')) {
-            <div>Vehicle name must be at least 5 characters</div>
-          }
-        </div>
+        @let vn = vehicleForm.get('vehicleName');
+        @if (vn?.invalid && vn?.touched) {
+          <div class="alert alert-danger">
+            @if (vn?.hasError('required')) {
+              <div>Vehicle name is required</div>
+            } @else if (vn?.hasError('minlength')) {
+              <div>Vehicle name must be at least 5 characters</div>
+            }
+          </div>
         }
       </div>
 
@@ -43,18 +40,16 @@
         </label>
         <div class="row-value">
           <input type="text"
-                 name="vehicleType"
-                 id="vehicleTypeId"
                  class="form-control"
-                 [(ngModel)]="vehicle.vehicleType"
-                 #vehicleType="ngModel"
-                 required
+                 formControlName="vehicleType"
+                 id="vehicleTypeId"
                  placeholder="Vehicle type" />
         </div>
-        @if (vehicleType.invalid && vehicleType.touched) {
-          <div class="alert alert-danger">
-            <div>Vehicle type is required</div>
-          </div>
+        @let vt = vehicleForm.get('vehicleType');
+        @if (vt?.invalid && vt?.touched) {
+        <div class="alert alert-danger">
+          <div>Vehicle type is required</div>
+        </div>
         }
       </div>
 
@@ -65,15 +60,13 @@
         </label>
         <div class="row-value">
           <input type="text"
-                 name="description"
-                 id="descriptionId"
                  class="form-control"
-                 [(ngModel)]="vehicle.description"
-                 #description="ngModel"
-                 minlength="10"
+                 formControlName="description"
+                 id="descriptionId"
                  placeholder="Vehicle description" />
         </div>
-        @if (description.invalid && description.touched) {
+        @let d = vehicleForm.get('description');
+        @if (d?.invalid && d?.touched) {
         <div class="alert alert-danger">
           <div>Description must be at least 10 characters</div>
         </div>
@@ -87,15 +80,13 @@
         </label>
         <div class="row-value">
           <input type="number"
-                 name="occupancy"
-                 id="passengerId"
                  class="form-control"
-                 [(ngModel)]="vehicle.occupancy"
-                 #occupancy="ngModel"
-                 min="0"
+                 formControlName="occupancy"
+                 id="passengerId"
                  placeholder="Number of passengers" />
         </div>
-        @if (occupancy.invalid && occupancy.touched) {
+        @let occ = vehicleForm.get('occupancy');
+        @if (occ?.invalid && occ?.touched) {
         <div class="alert alert-danger">
           <div>Occupancy cannot be negative</div>
         </div>
@@ -109,10 +100,9 @@
         </label>
         <div class="row-value">
           <input type="date"
-                 name="manufactureDate"
-                 id="manufactureDateId"
                  class="form-control"
-                 [(ngModel)]="vehicle.manufactureDate" />
+                 formControlName="manufactureDate"
+                 id="manufactureDateId" />
         </div>
       </div>
 
@@ -121,12 +111,12 @@
           <button type="submit"
                   title="Ensure the form is valid and required fields are entered before saving"
                   class="btn btn-primary"
-                  [disabled]="f.invalid">
+                  [disabled]="vehicleForm.invalid">
             Save Vehicle
           </button>
           <button type="button"
                   class="btn btn-secondary"
-                  (click)="onCancel(f)">
+                  (click)="onCancel()">
             Cancel
           </button>
         </div>
@@ -138,7 +128,7 @@
           <div class="alert alert-success"
                role="status"
                aria-live="polite">
-            {{ savedMessage() }}
+            {{savedMessage()}}
           </div>
           }
         </div>
